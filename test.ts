@@ -1,4 +1,4 @@
-import { _228529_ } from "./dist/evm-asm.js";
+import { assemble } from "./dist/evm-asm.js";
 
 const code = `
 #-MAKE----------# copy runcode to mem, trickle runcode size
@@ -64,7 +64,7 @@ RETURNDATASIZE  # 55    # 3d    #       ss key
 SSTORE          # 56    # 55    #   ss s0=0
 `;
 
-console.log(_228529_(code, {
+console.log(assemble(code, {
     "?D": "0102030401020304010203040102030401020304",
     "?x": "6020343434335afa3451803b343482933c34f3"
 }));

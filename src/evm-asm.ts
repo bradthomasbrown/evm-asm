@@ -193,8 +193,12 @@ function _95f73e_(code:string) {
     return _0d_;
 }
 
-function _228529_(_8d_:Parameters<typeof _95f73e_>[0], _1b_:Parameters<typeof _992d55_>[1]) {
-    return _992d55_(_95f73e_(_8d_), _1b_);
+/**
+ * @param {object} _1b_ - A mapping of identifier literals to hex literals.
+ * Any identifier type token in the assembly code which matches a key in this mapping will be converted to a hex literal type, with the token value replaced by the mapping value.
+ */
+function assemble(code:Parameters<typeof _95f73e_>[0], _1b_:Parameters<typeof _992d55_>[1]) {
+    return _992d55_(_95f73e_(code), _1b_);
 }
 
-export { _228529_ };
+export { assemble };
