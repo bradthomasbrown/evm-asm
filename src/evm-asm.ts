@@ -68,6 +68,12 @@ function _5e8904_(_3e_:string, _92_:number) {
         };
         const _55_ = _3e_.charAt(_f4_);
         if (_5c_ == false) {
+            if (_55_ == "#") {
+                _73_ = true;
+                _bd_ = true;
+                _f4_++;
+                continue;
+            }
             for (const delimiter of delimiters)
                 if (_55_ == delimiter) _73_ = true;
             _f4_++;
