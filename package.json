@@ -1,0 +1,13 @@
+{
+    "name": "@bradthomasbrown/evm-asm",
+    "description": "Minimal, unoptimized, unaudited, and experimental Ethereum/EVM assembler in JavaScript/TypeScript.",
+    "version": "1.0.0",
+    "author": "Brad Brown <https://t.me/bradthomasbrown>",
+    "type": "module",
+    "files": [
+        "dist/"
+    ],
+    "exports": {
+        ".": "./dist/evm-asm.js"
+    }
+}
