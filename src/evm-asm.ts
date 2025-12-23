@@ -105,7 +105,7 @@ function _5e8904_(_3e_:string, _92_:number) {
     return [_f4_, { token, type }] as [number, { token:string, type:number }];
 }
 
-function _992d55_(_79_:ReturnType<typeof _95f73e_>, _09_:{ [k:string]:string }) {
+function _992d55_(_79_:ReturnType<typeof _95f73e_>, _09_?:{ [k:string]:string }) {
     const labels = new Map<string,number>();
     const references = new Map<string,number|string>();
     const addresses = new Map<typeof _79_[number],number>();
@@ -114,7 +114,7 @@ function _992d55_(_79_:ReturnType<typeof _95f73e_>, _09_:{ [k:string]:string }) 
         unresolved = 0, changes = 0, pc = 0;
         for (let i = 0; i < _79_.length; i++) {
             const _87_ = _79_[i]!;
-            if (_09_[_87_.token] != undefined) {
+            if (_09_ && _09_[_87_.token] != undefined) {
                 _87_.token = _09_[_87_.token]!;
                 _87_.type = 2;
             }
@@ -203,7 +203,7 @@ function _95f73e_(code:string) {
  * @param {object} _1b_ - A mapping of identifier literals to hex literals.
  * Any identifier type token in the assembly code which matches a key in this mapping will be converted to a hex literal type, with the token value replaced by the mapping value.
  */
-function assemble(code:Parameters<typeof _95f73e_>[0], _1b_:Parameters<typeof _992d55_>[1]) {
+function assemble(code:Parameters<typeof _95f73e_>[0], _1b_?:Parameters<typeof _992d55_>[1]) {
     return _992d55_(_95f73e_(code), _1b_);
 }
 
