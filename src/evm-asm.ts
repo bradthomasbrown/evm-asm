@@ -164,7 +164,7 @@ function _992d55_(_79_:ReturnType<typeof _95f73e_>, _09_?:{ [k:string]:string })
             throw new Error(`identifier missing reference: ${JSON.stringify(foo)}`);
         }
     }
-    const _6a_ = pc + labels.get("RUN")!;
+    const _6a_ = pc + (labels.get("RUN") ?? 0);
     const _e3_ = new Array(_6a_);
     for (let i = 0, j = 0; i < _79_.length; i++){
         const _43_ = _79_[i]!;
