@@ -1,6 +1,6 @@
 import { assemble } from "./dist/evm-asm.js";
 
-const code = `
+const _8a_ = `
 #-MAKE----------# copy runcode to mem, trickle runcode size
 PUSH1 RUNSIZE        # 00    # 60?r  #       ret size, trickle, ?r=57
 DUP1            # 02    # 80    #       cc size
@@ -64,8 +64,36 @@ RETURNDATASIZE  # 55    # 3d    #       ss key
 SSTORE          # 56    # 55    #   ss s0=0
 `;
 
-console.log(assemble(code, {
+
+console.log(assemble(_8a_, {
     "?D": "0102030401020304010203040102030401020304",
     "?x": "6020343434335afa3451803b343482933c34f3"
 }));
 // 60578060093d393df336600b573d543d52593df35b3373010203040102030401020304010203040102030414602757005b6020360360203d37593d3df03d55726020343434335afa3451803b343482933c34f33d523d356013600d34f53d3d55
+
+// init_20240118
+const _be_ = `#---------------# call create2 contract to get create implementation address
+PUSH1 20        # 00    # 6020  #       c rs [rs]
+CALLVALUE       # 02    # 34    #       c ro [ro, rs]
+CALLVALUE       # 03    # 34    #       c as [as, ro, rs]
+CALLVALUE       # 04    # 34    #       c ao [ao, as, ro, rs]
+CALLER          # 05    # 33    #       c a [a, ao, as, ro, rs]
+GAS             # 06    # 5a    #       c g [g, a, ao, as, ro, rs]
+STATICCALL      # 07    # fa    #   c [] m00,20=a
+#---------------# get code size
+CALLVALUE       # 08    # 34    #               ml o [o]
+MLOAD           # 09    # 51    #           ecs a, ml [a]
+DUP1            # 0a    # 80    #           [a, a]
+EXTCODESIZE     # 0b    # 3b    #       ecs [s, a]
+#---------------# copy code to mem
+CALLVALUE       # 0c    # 34    #       ecc o [o, s, a]
+CALLVALUE       # 0d    # 34    #       ecc do [do, o, s, a]
+DUP3            # 0e    # 82    #       [s, do, o, s, a]
+SWAP4           # 0f    # 93    #       ecc address [a, do, o, s, s]
+EXTCODECOPY     # 10    # 3c    #   ecc [s] m00,size=c
+#---------------# return code from mem
+CALLVALUE       # 11    # 34    #   ret offset [o, s]
+RETURN          # 12    # f3    #   ret []`;
+
+console.log(assemble(_be_));
+// 6020343434335afa345134813b343482943cf3
