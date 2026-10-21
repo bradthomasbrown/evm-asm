@@ -17,6 +17,9 @@ The below usage example uses a very mildly adapted version of EVM assembly we wr
 npm i @bradthomasbrown/evm-asm
 ```
 
+## Tests
+Run `npm test` with Node.js 22.16 or later. The regression tests run directly against the TypeScript source without build dependencies.
+
 ## Usage
 - `instructions` or `opcodes` are just the matching string from any EVM opcode reference, like `RETURNDATASIZE`, `CALLER`, `PUSH1`, etc.
 - labels are anything else which end in a colon (`:`)

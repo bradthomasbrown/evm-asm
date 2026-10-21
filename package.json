@@ -4,6 +4,9 @@
     "version": "1.0.0",
     "author": "Brad Brown <https://t.me/bradthomasbrown>",
     "type": "module",
+    "scripts": {
+        "test": "node --experimental-strip-types --test test/*.test.mjs"
+    },
     "files": [
         "dist/"
     ],

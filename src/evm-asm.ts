@@ -147,6 +147,18 @@ function _992d55_(_79_:ReturnType<typeof _95f73e_>, _09_?:{ [k:string]:string })
                     _79_[i - 1]!.token = "PUSH1";
                     changes++;
                 }
+                // A forward reference must reserve its operand bytes before
+                // resolution. Otherwise early PCs are underestimated, PUSH2 can
+                // shrink prematurely, and a later 2-byte address is emitted
+                // after PUSH1. Also grow a narrow reference if needed.
+                if (_77_ != undefined && _77_ > 0xff && _79_[i - 1]!.token == "PUSH1") {
+                    _79_[i - 1]!.token = "PUSH2";
+                    changes++;
+                }
+                if (_77_ == undefined) {
+                    const previous = _79_[i - 1]?.token;
+                    pc += previous == "PUSH1" ? 1 : 2;
+                }
                 if (_77_ != undefined && _77_ <= 0xff) pc++;
                 if (_77_ != undefined && _77_ > 0xff && _77_ <= 0xffff) pc += 2;
                 if (_77_ != undefined && _77_ > 0xffff) throw new Error(`unexpectedly large program counter (${pc})`);
